@@ -29,7 +29,7 @@ create TABLE users
 (
     id           serial primary key,
     username     varchar(20) NOT NULL,
-    password     varchar(20) NOT NULL,
+    password     varchar(200) NOT NULL,
     authority_id integer     NOT NULL,
     foreign key (authority_id) references authorities (id)
 );

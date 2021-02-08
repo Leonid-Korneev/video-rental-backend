@@ -1015,6 +1015,7 @@ UC/10
     </sequence>
     <table id="37" parent="18" name="authorities">
       <ObjectId>17035</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>2584</StateNumber>
     </table>
@@ -1041,6 +1042,7 @@ UC/10
     </table>
     <table id="42" parent="18" name="users">
       <ObjectId>17043</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>2584</StateNumber>
     </table>
