@@ -54,7 +54,7 @@ class AuthorityController {
     async getAuthoritiesList(req, res) {
         const client = await db.connect();
         try {
-            const authoritiesList = await client.query(
+             const authoritiesList = await client.query(
                 `select id, authority
                  from authorities`,
                 []);

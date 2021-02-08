@@ -37,9 +37,64 @@ class LogbookController {
 
     }
 
-    
+    async updateLogbook(req, res) {
+        const {logBookId, filmId, userId, issueDate, returnDate} = req.body;
+        const client = await db.connect();
+        try {
+            await client.query(`
+                        update logbook
+                        set issue_date  =$1,
+                            return_date =$2,
+                            film_id=$3,
+                            user_id=$4
+                        where id = $5
+                `,
+                [issueDate, returnDate, filmId, userId, logBookId]);
+        } catch (e) {
+            res.send(500, e.message);
+        } finally {
+            client.release();
+            res.send(200, 'OK');
+        }
 
+    }
 
+    async getUserLogbookList(req, res) {
+        const userId = req.params.id;
+
+        const client = await db.connect();
+        try {
+
+            const logbooks = await client.query(
+                `select *
+                 from logbook
+                 where user_id = $1`,
+                [userId]);
+            res.send(200, logbooks.rows);
+
+        } catch (e) {
+
+        } finally {
+            client.release();
+        }
+    }
+
+    async getFullLogbookList(req, res) {
+        const client = await db.connect();
+        try {
+
+            const logbooks = await client.query(
+                `select *
+                 from logbook`,
+                []);
+            res.send(200, logbooks.rows);
+
+        } catch (e) {
+            res.send(500, e.message);
+        } finally {
+            client.release();
+        }
+    }
 }
 
 module.exports = new LogbookController();
