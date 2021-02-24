@@ -10,7 +10,8 @@ class LogbookController {
                     select *
                     from logbook
                     where film_id = $1
-                      and user_id = $2`,
+                      and user_id = $2
+                      and return_date is null`,
             [filmId, userId]
         );
 
@@ -68,7 +69,8 @@ class LogbookController {
             const logbooks = await client.query(
                 `select *
                  from logbook
-                 where user_id = $1`,
+                 where user_id = $1
+                 order by issue_date desc`,
                 [userId]);
             res.send(200, logbooks.rows);
 
@@ -85,7 +87,8 @@ class LogbookController {
 
             const logbooks = await client.query(
                 `select *
-                 from logbook`,
+                 from logbook
+                 order by issue_date desc`,
                 []);
             res.send(200, logbooks.rows);
 

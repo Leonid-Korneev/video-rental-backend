@@ -83,14 +83,14 @@ class UserController {
                         [userInfo['authority_id']]
                     );
                     userAuthority = userAuthority.rows[0];
-                    res.send(200, {authority:userAuthority, user: {userId: userInfo.id}});
+                    res.send(200, {authority: userAuthority, user: {userId: userInfo.id}});
 
                 } else {
                     res.send(401, 'Not allowed');
                 }
 
             } else {
-                res.send(500, 'No such user');
+                res.send(401, 'No such user');
             }
 
         } catch (e) {
@@ -197,6 +197,46 @@ class UserController {
             }
 
 
+        } finally {
+            client.release();
+        }
+
+    }
+
+    async getUsersById(req, res) {
+        const client = await db.connect();
+        const userId = req.params.id
+        try {
+            const usersList = await client.query(
+                `select id, username, authority_id
+                 from users
+                 where id = $1`,
+                [userId]);
+            res.send(200, usersList.rows[0]);
+        } catch (e) {
+            res.send(500, e.message);
+        } finally {
+            client.release();
+        }
+
+    }
+
+
+    async getUserPassportInfo(req, res) {
+        const client = await db.connect();
+        const userId = req.params.id
+        try {
+            const userPassport = await client.query(
+                `
+                    select *
+                    from passports
+                    where user_id = $1;
+                `,
+                [userId]);
+            res.send(200, userPassport.rows[0]);
+
+        } catch (e) {
+            res.send(500, e.message);
         } finally {
             client.release();
         }

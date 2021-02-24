@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/controller/authority.controller.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/controller/films.controller.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/controller/logbook.controller.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/controller/report.controller.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/controller/studios.controller.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/controller/user.controller.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/database.sql" dialect="GenericSQL" />
